@@ -16,8 +16,9 @@ module.exports = class Email {
       return nodemailer.createTransport({
         service: 'SendGrid',
         auth: {
-          user: "apikey",
-          pass: "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"
+          user: 'apikey',
+          pass:
+            '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'
         }
       });
     }
@@ -50,8 +51,7 @@ module.exports = class Email {
       // html:
     };
 
-    const result = await this.newTransport().sendMail(mailOptions);
-    console.log(result)
+    await this.newTransport().sendMail(mailOptions);
   }
 
   async sendWelcome() {

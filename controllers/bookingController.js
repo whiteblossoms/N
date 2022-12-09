@@ -1,14 +1,13 @@
-const Tour = require('./../models/tourModel');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const catchAsync = require('./../utils/catchAsync');
 const factory = require('./handlerFactory');
-const AppError = require('../utils/appError');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const Tour = require('./../models/tourModel');
 const Booking = require('../models/bookingModel');
 
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   const tour = await Tour.findById(req.params.tourId);
-  const { data } = await stripe.checkout.sessions.list();
-  console.log(data);
+  // const { data } = await stripe.checkout.sessions.list();
+  // console.log(data);
   // console.log(req.host, req.get('host'), req.hostname);
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
